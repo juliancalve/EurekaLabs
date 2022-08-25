@@ -1,15 +1,17 @@
+import { CSSProperties } from "react";
+
 export interface Photo {
-    uri: string;
-    altitude: string;
-    latitude: string;
-    longitude: string;
+    uri: string | undefined;
+    altitude: number | null;
+    latitude: number;
+    longitude: number;
 }
 
 export interface ButtonProps {
     title: string;
-    onPress: any;
+    onPress: () => void;
     mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
-    style?: any
+    style?: CSSProperties
 }
 
 export interface CardProps {

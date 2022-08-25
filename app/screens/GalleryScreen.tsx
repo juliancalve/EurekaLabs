@@ -7,6 +7,7 @@ import { PhotosContext } from '@context';
 import { Photo } from '@interfaces';
 import { PATHS, SIZES } from '@constants';
 import { ScrollView } from 'react-native-gesture-handler';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 const GalleryScreen = () => {
 
@@ -14,12 +15,11 @@ const GalleryScreen = () => {
   const { photos, addPhoto } = useContext( PhotosContext );
   const [getGeolocation] = useLocation();
   const [openCamera] = useCamera({
-    onTakePicture: async (data: any) => {
+    onTakePicture: async (data: ImagePickerResponse) => {
       const ph = data?.assets?.[0];
       if(ph) {
         const location = await getGeolocation();
-        const { latitude, longitude, altitude } = location;
-        addPhoto({uri: ph.uri, latitude, longitude, altitude})
+        addPhoto({uri: ph.uri, ...location})
       }
     }});
 

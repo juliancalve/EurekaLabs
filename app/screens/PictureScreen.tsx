@@ -1,12 +1,17 @@
 import React, { useContext } from 'react'
 import { Image, View, Share } from 'react-native'
 import { Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation } from '@react-navigation/native'
 import { Button, Card } from '@components';
 import { PhotosContext } from '@context';
 import { PATHS } from '@constants';
+import { Photo } from '@interfaces';
 
-const PictureScreen = ({ route }: any) => {
+interface Props {
+  route: RouteProp<{ params: { photo: Photo }}>;
+}
+
+const PictureScreen: React.FC<Props> = ({ route }) => {
 
   const navigator: any = useNavigation();
   const { removePhoto } = useContext( PhotosContext );

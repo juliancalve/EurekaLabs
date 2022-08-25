@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { PermissionStatus, Platform } from 'react-native';
-import { check, PERMISSIONS, request } from 'react-native-permissions';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import Geolocation from 'react-native-geolocation-service';
 
-export const useLocation: any = () => {
+export const useLocation = () => {
 
     const checkLocationPermission = async () => {
 
@@ -17,11 +17,12 @@ export const useLocation: any = () => {
 
     }
 
-    const getGeolocation = async () => {
+    const getGeolocation = async (): Promise<{ latitude: number, longitude: number, altitude: number | null }> => {
         return new Promise( (res, rej) => {
             Geolocation.getCurrentPosition(
                 (position) => {
                     const { coords } = position;
+                    
                     res(coords);
                 },
                 (error) => {
